@@ -1,0 +1,45 @@
+﻿@model Blog.DAL.Classes.Project
+@{
+    ViewBag.Title = "AddProject";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+@section SelectedList{
+    <script>
+        $('li.secim:nth-of-type(3)').addClass("active");
+    </script>
+}
+<div class="container">
+
+    <div class="row">
+        @using (Html.BeginForm("AddProject", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+           @Html.AntiForgeryToken()
+            <br />
+            @Html.Label("Subject")
+            @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", required = "required" });
+            <br />
+            @Html.Label("Content")
+            <textarea name="Content" id="Content" required></textarea>
+            <br />
+            @Html.Label("Tags")
+            <select class="select2 form-control m-t-15" multiple="multiple" style="height: 36px;width: 100%;" name="tags" id="tags" required>
+                @foreach (var item in ViewBag.Tags)
+                {
+                    <option value="@item.ID">@item.Name</option>
+                }
+            </select>
+            <br />
+            <br />
+            @Html.Label("Image")
+            <input required type="file" name="File" id="File" />
+            <br />
+            <button class="btn btn-primary">Add</button>
+            <br />
+            <br />
+        }
+    </div>
+
+</div>
+
+
+

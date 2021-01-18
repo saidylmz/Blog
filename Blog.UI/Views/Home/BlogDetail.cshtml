@@ -1,0 +1,126 @@
+﻿@model Blog.DAL.Classes.Project
+@{
+    ViewBag.Title = "BlogDetail";
+    Layout = "~/Views/Shared/_siteLayout.cshtml";
+}
+
+<div class="container inner">
+    <div class="single blog row">
+        <div class="col-md-8 col-sm-12 content">
+            <div class="blog-posts">
+                <div class="post box">
+                    <div class="meta"><span class="date">@Model.CreatedDate.ToShortDateString()</span><span class="comments"><a href="#">@Model.Comments.Count<i class="icon-chat-1"></i></a></span></div>
+                    <h2 class="post-title">@Model.Subject</h2>
+                    <p>@Html.Raw(Model.Content)</p>
+                    <div class="meta tags">
+                        @foreach (var item in Model.TagDetails)
+                        {
+                            <a href="#">@item.Tag.Name</a>@:,
+                        }
+                    </div>
+                    <!-- /.tags -->
+                </div>
+                <!-- /.post -->
+            </div>
+            <!-- /.blog-posts -->
+
+            <div class="divide20"></div>
+
+            <div id="comments" class="box">
+                <h3>@Model.Comments.Count yorum</h3>
+                <ol id="singlecomments" class="commentlist">
+                    @foreach (var item in Model.Comments.Where(x => x.Parent == null))
+                    {
+                        <li>
+                            <div class="user frame"><img alt="" src="~/Images/default-user-avatar.png" class="avatar" /></div>
+                            <div class="message">
+                                <div class="info">
+                                    <h2><a href="#">@item.NameSurname</a></h2>
+                                    <div class="meta">
+                                        <div class="date">@item.CreatedDate.ToShortDateString()</div>
+                                        <a class="reply-link" href="#">Cevapla</a>
+                                    </div>
+                                </div>
+                                <p>@item.Content</p>
+                            </div>
+                            @foreach (var child in item.Childs)
+                            {
+                                <ul class="children">
+                                    <li class="bypostauthor">
+                                        <div class="user frame"><img alt="" src="~/Images/default-user-avatar.png" class="avatar" /></div>
+                                        <div class="message">
+                                            <div class="bypostauthor">
+                                                <div class="info">
+                                                    <h2><a href="#">@child.NameSurname</a></h2>
+                                                    <div class="meta">
+                                                        <div class="date">@child.CreatedDate.ToShortDateString()</div>
+                                                        <a class="reply-link" href="#">Cevapla</a>
+                                                    </div>
+                                                </div>
+                                                <p>@child.Content</p>
+                                            </div>
+                                        </div>
+                                        @foreach (var child2 in child.Childs)
+                                        {
+                                            <ul class="children">
+                                                <li class="bypostauthor">
+                                                    <div class="user frame"><img alt="" src="~/Images/default-user-avatar.png" class="avatar" /></div>
+                                                    <div class="message">
+                                                        <div class="bypostauthor">
+                                                            <div class="info">
+                                                                <h2><a href="#">@child2.NameSurname</a></h2>
+                                                                <div class="meta">
+                                                                    <div class="date">@child2.CreatedDate.ToShortDateString()</div>
+                                                                    <a class="reply-link" href="#">Cevapla</a>
+                                                                </div>
+                                                            </div>
+                                                            <p>@child2.Content</p>
+                                                        </div>
+                                                    </div>
+
+                                                </li>
+                                            </ul>
+                                        }
+                                    </li>
+                                </ul>
+                            }
+                        </li>
+                    }
+                </ol>
+            </div>
+            <!-- /#comments -->
+
+            <div class="divide20"></div>
+
+            <div class="comment-form-wrapper box">
+                <h3>Düşüncelerini bizimle paylaş!</h3>
+                <p>Email adresiniz gösterilmeyecektir. * olan alanlar zorunludur.</p>
+                @using (Html.BeginForm("PostComment", "Home"))
+                {
+                    @Html.HiddenFor(x => x.ID)
+                    <div class="name-field">
+                        <input type="text" name="first" title="İsim*" />
+                    </div>
+                    <div class="email-field">
+                        <input type="text" name="first" title="Email*" />
+                    </div>
+                    <div class="website-field">
+                        <input type="text" name="first" title="Website" />
+                    </div>
+                    <div class="message-field">
+                        <textarea name="textarea" id="textarea" rows="5" cols="30" title="Yorum..."></textarea>
+                    </div>
+                    <input type="submit" value="Gönder" name="submit" class="btn btn-submit" />
+                }
+            </div>
+            <!-- /.comment-form-wrapper -->
+
+        </div>
+        <!-- /.content -->
+
+        @Html.Partial("BlogSide")
+
+    </div>
+    <!-- /.blog -->
+
+</div>

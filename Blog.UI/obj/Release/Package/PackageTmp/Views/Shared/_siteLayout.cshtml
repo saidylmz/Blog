@@ -1,0 +1,106 @@
+﻿@{ 
+    ViewBag.Info = new Blog.BLL.Classes.InfoController().Get();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="~/Images/logo.png">
+    <title>Sait YILMAZ | Kişisel Blog</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/sitestyle/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/sitestyle/css/plugins.css" rel="stylesheet">
+    <link href="~/Content/sitestyle/css/prettify.css" rel="stylesheet">
+    <link href="~/Content/sitestyle.css" rel="stylesheet">
+    <link href="~/Content/sitestyle/css/color/green.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,700,600,500,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic' rel='stylesheet' type='text/css'>
+    <link href="~/Content/sitestyle/type/fontello.css" rel="stylesheet">
+    <link href="~/Content/sitestyle/type/budicons.css" rel="stylesheet">
+</head>
+<body class="full-layout">
+    <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+    <div class="body-wrapper">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <a class="btn responsive-menu" data-toggle="collapse" data-target=".navbar-collapse"><i></i></a>
+                <div class="navbar-brand text-center"> <a href="@Url.Action("Index","Home")"><img width="50" src="~/Images/logo.png" alt="" data-src="/Images/logo.png" data-ret="/Images/logo@2x.png" class="retina" /></a> </div>
+                <!-- /.navbar-brand -->
+            </div>
+            <!-- /.navbar-header -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="current"><a onclick="Scroll('#Anasayfa')" href="/Home/Index#Anasayfa" class="hint--right" data-hint="Anasayfa"><i class="budicon-home-1"></i><span>Anasayfa</span></a></li>
+                    <li><a onclick="Scroll('#Projeler')" href="/Home/Index#Projeler" class="hint--right" data-hint="Projeler"><i class="budicon-image"></i><span>Projeler</span></a></li>
+                    <li><a onclick="Scroll('#Hakkımda')" href="/Home/Index#Hakkımda" class="hint--right" data-hint="Hakkımda"><i class="budicon-author"></i><span>Hakkımda</span></a></li>
+                    <li><a onclick="Scroll('#Iletişim')" href="/Home/Index#Iletişim" class="hint--right" data-hint="İLETİŞİM"><i class="budicon-profile"></i><span>İLETİŞİM</span></a></li>
+                    @*<li><a href="@Url.Action("Blog","Home")" class="hint--right" data-hint="Blog"><i class="budicon-book-1"></i><span>Blog</span></a></li>*@
+                    <li><a href="#Bağlantılar" class="hint--right fancybox-inline" data-hint="Bağlantılar" data-fancybox-width="325" data-fancybox-height="220"><i class="icon-heart-empty-1"></i><span>Bağlantılar</span></a></li>
+                </ul>
+                <!-- /.navbar-nav -->
+            </div>
+            <!-- /.navbar-collapse -->
+            <div id="Bağlantılar" style="display:none;">
+                <h1>Aşağıdaki bağlantıları kullanarak beni takip edebilirsiniz.</h1>
+                <div class="divide20"></div>
+                <ul class="social">
+                    @if (ViewBag.Info != null)
+                    {
+                        if (ViewBag.Info.Github != null)
+                        {
+                            <li><a href="#"><i class="icon-s-github"></i></a></li>
+                        }
+                        if (ViewBag.Info.Linkedin != null)
+                        {
+                            <li><a href="#"><i class="icon-s-linkedin"></i></a></li>
+                        }
+                        if (ViewBag.Info.Twitter != null)
+                        {
+                            <li><a href="#"><i class="icon-s-twitter"></i></a></li>
+                        }
+                        if (ViewBag.Info.Facebook != null)
+                        {
+                            <li><a href="#"><i class="icon-s-facebook"></i></a></li>
+                        }
+                        if (ViewBag.Info.Instagram != null)
+                        {
+                            <li><a href="#"><i class="icon-s-instagram"></i></a></li>
+                        }
+                    }
+                </ul>
+            </div>
+            <!-- /#elsewhere -->
+        </nav>
+        <!-- /.navbar -->
+        <div class="render-body col-lg-12">
+            @RenderBody()
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.body-wrapper -->
+    <script src="~/Content/sitestyle/js/jquery.min.js"></script>
+    <script src="~/Content/sitestyle/js/bootstrap.min.js"></script>
+    <script src="~/Content/sitestyle/js/jquery.themepunch.tools.min.js"></script>
+    <script src="~/Content/sitestyle/js/classie.js"></script>
+    <script src="~/Content/sitestyle/js/plugins.js"></script>
+    <script src="~/Content/sitestyle/js/scripts.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <div class="video-overlay"></div>
+    <video id="bgvid" autoplay muted loop>
+        <source src="~/Content/sitestyle/video/seattleferryride.webm" type="video/webm">
+        <source src="~/Content/sitestyle/video/seattleferryride.mp4" type="video/mp4">
+    </video>
+</body>
+</html>
+@RenderSection("scripts",false)
+<script>
+    function Scroll(divid) {
+        $('html,body').animate({
+            scrollTop: ($(divid).offset().top)
+        }, 'slow')
+    }
+</script>

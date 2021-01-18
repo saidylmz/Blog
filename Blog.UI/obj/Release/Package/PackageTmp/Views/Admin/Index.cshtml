@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+@section SelectedList{
+    <script>
+        $('li.secim:nth-of-type(2)').addClass("active");
+    </script>
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Dashboard
+        <small>Control panel</small>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>@ViewBag.ProjectCount</h3>
+
+                    <p>Projects</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>@ViewBag.BlogCount</h3>
+
+                    <p>Blogs</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-android-desktop"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>@ViewBag.Visitors</h3>
+                    <p>All Visitors</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-adn"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6" style="float:right;">
+            <!-- small box -->
+            <div class="small-box bg-red-active">
+                <div class="inner">
+                    <h3>@ViewBag.Visitors</h3>
+                    <p>Monthly Visitors</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-moon-o"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6" style="float:right;">
+            <!-- small box -->
+            <div class="small-box bg-red-gradient">
+                <div class="inner">
+                    <h3>@ViewBag.Visitors</h3>
+                    <p>Daily Visitors</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-calendar-check-o"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>@ViewBag.CommentCount</h3>
+
+                    <p>Comments</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
+
+</section>
+<!-- /.content -->

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.DAL", "Blog.DAL\Blog.DAL.csproj", "{AE651CAA-B958-4756-A9E5-21199AC269D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.BLL", "Blog.BLL\Blog.BLL.csproj", "{59D14C90-F1A0-4237-8F4F-E909523DE160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.UI", "Blog.UI\Blog.UI.csproj", "{E628197A-D1AE-4072-AA08-EF1FBDE0558C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE651CAA-B958-4756-A9E5-21199AC269D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE651CAA-B958-4756-A9E5-21199AC269D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE651CAA-B958-4756-A9E5-21199AC269D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE651CAA-B958-4756-A9E5-21199AC269D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59D14C90-F1A0-4237-8F4F-E909523DE160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59D14C90-F1A0-4237-8F4F-E909523DE160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59D14C90-F1A0-4237-8F4F-E909523DE160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59D14C90-F1A0-4237-8F4F-E909523DE160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E628197A-D1AE-4072-AA08-EF1FBDE0558C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E628197A-D1AE-4072-AA08-EF1FBDE0558C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E628197A-D1AE-4072-AA08-EF1FBDE0558C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E628197A-D1AE-4072-AA08-EF1FBDE0558C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F43983F-AF09-4095-BDE4-7FC7A75D4234}
+	EndGlobalSection
+EndGlobal

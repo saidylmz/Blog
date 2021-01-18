@@ -1,0 +1,256 @@
+﻿@model Blog.DAL.Classes.Info
+@{
+    Layout = "~/Views/Shared/_siteLayout.cshtml";
+}
+
+<section id="Anasayfa" class="naked">
+    <div class="fullscreenbanner-container revolution">
+        <div class="fullscreenbanner">
+            <ul>
+                <li data-transition="fade">
+                    <img src="~/Content/sitestyle/images/dummy.png" alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="repeat">
+                    <h1 class="tp-caption caption large sfb" data-x="center" data-y="center" data-voffset="-25" data-speed="900" data-start="1000" data-endspeed="100" data-easing="Sine.easeOut">Merhaba! Sayfama Hoşgeldiniz.</h1>
+                    <div class="tp-caption small tp-fade fadeout tp-resizeme" data-x="center" data-y="center" data-voffset="25" data-speed="100"
+                         data-start="1500"
+                         data-easing="Power4.easeOut"
+                         data-splitin="chars"
+                         data-splitout="chars"
+                         data-elementdelay="0.03"
+                         data-endelementdelay="0"
+                         data-endspeed="100"
+                         data-endeasing="Power1.easeOut"
+                         style="z-index: 3; white-space: nowrap;">Back-End Developer</div>
+                    <div class="arrow smooth"><a style="cursor:pointer" onclick="Scroll('#Projeler')"><i class="icon-down-open-big"></i></a></div>
+                </li>
+            </ul>
+            <div class="tp-bannertimer"></div>
+        </div>
+        <!-- /.fullscreenbanner -->
+    </div>
+    <!-- /.revolution -->
+</section>
+<!-- /#home -->
+
+<div class="container">
+    <section id="Projeler" class="portfolio">
+        <div class="box">
+            <h2 class="section-title pull-left">Projelerim</h2>
+            <div id="filters-container" class="cbp-l-filters-alignRight pull-right">
+                <div data-filter="*" class="cbp-filter-item-custom-active cbp-filter-item-custom btn">
+                    Hepsi
+                    <div class="cbp-filter-counter"></div>
+                </div>
+                @foreach (Blog.DAL.Classes.Tag item in ViewBag.Tags)
+                {
+                    if (!item.Name.Contains("Proje") && !item.Name.Contains("Blog"))
+                    {
+                        <div data-filter=".@item.ID" class="cbp-filter-item-custom btn">
+                            @item.Name
+                            <div class="cbp-filter-counter"></div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="clearfix"></div>
+            <div id="grid-container" class="cbp-l-grid-masonry">
+                <ul>
+                    @foreach (Blog.DAL.Classes.Project item in ViewBag.Projects)
+                    {
+                        <li class="cbp-item frame @foreach(var item2 in item.TagDetails.ToList())
+                        { @item2.Tag.ID@:
+                            }">
+
+                            <a class="cbp-caption cbp-singlePage" href="/Home/ProjectDetail/@item.ID">
+                                <div class="cbp-caption-defaultWrap"> <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" alt=""> </div>
+                                <div class="cbp-caption-activeWrap">
+                                    <div class="cbp-l-caption-alignCenter">
+                                        <div class="cbp-l-caption-body">
+                                            <div class="cbp-l-caption-title">@item.Subject</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- /.cbp-l-grid-masonry -->
+            @*<div class="cbp-l-loadMore-button"> <a href="ajax/port1-more.html" class="cbp-l-loadMore-button-link btn">Daha Fazla</a> </div>*@
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /#portfolio -->
+
+    <section id="Hakkımda">
+        <div class="box">
+            <h2 class="section-title">Ben Kimim?</h2>
+            <div class="row">
+                @*<div class="col-md-5 col-md-push-7 col-sm-12">
+                        <figure class="frame"><img src="~/Content/sitestyle/images/art/about.jpg" alt="" /></figure>
+                    </div>*@
+                <!-- /column -->
+                <div @*class="col-md-7 col-md-pull-5 col-sm-12"*@>
+                    @if (Model != null)
+                    {
+                        <p>@Html.Raw(Model.About)</p>
+                    }
+                </div>
+                <!-- /column -->
+            </div>
+            <!-- /.row -->
+
+
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /#about -->
+
+    <section id="Iletişim">
+        <div class="box">
+            <h2 class="section-title">Iletişim</h2>
+            <p>Benimle iletişime geçmek için..</p>
+            <div class="divide20"></div>
+            <div class="row text-center services-2">
+                <div class="col-md-4 col-sm-6">
+                    <i class="budicon-map"></i>
+                    <p>
+                        @Html.DisplayFor(x => x.Adress)
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <i class="budicon-mobile"></i>
+                    <p>
+                        @Html.DisplayFor(x => x.Phone)
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <i class="budicon-mail"></i>
+                    <p>
+                        @if (Model != null)
+                        {
+                            <a class="nocolor" href="mailto:@Model.Email">@Model.Email</a> <br />
+                            if (Model.Email2 != null)
+                            {
+                                <a class="nocolor" href="mailto:@Model.Email2">@Model.Email2</a>
+                            }
+                        }
+                    </p>
+                </div>
+            </div>
+            <!-- /.services-2 -->
+            <div class="divide30"></div>
+            <div class="form-container">
+                <div class="response alert alert-info"></div>
+                @using (Ajax.BeginForm("SendMail", "Home", new AjaxOptions { OnSuccess = "OnSuccess", HttpMethod = "POST" }))
+                {
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-row text-input-row name-field">
+                                    <label>İsim*</label>
+                                    <input type="text" name="name" class="text-input defaultText required" placeholder="Sait YILMAZ" />
+                                </div>
+                                <div class="form-row text-input-row email-field">
+                                    <label>Email*</label>
+                                    <input type="text" name="email" class="text-input defaultText required email" placeholder="info@saityilmaz.com" />
+                                </div>
+                                <div class="form-row text-input-row subject-field">
+                                    <label>Başlık</label>
+                                    <input type="text" name="subject" class="text-input defaultText" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 lp5">
+                                <div class="form-row text-area-row">
+                                    <label>Mesaj*</label>
+                                    <textarea name="message" class="text-area required"></textarea>
+                                </div>
+                                <div class="form-row hidden-row">
+                                    <input type="hidden" name="hidden" value="" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="button-row pull-right">
+                                    <input type="submit" value="Gönder" name="submit" class="btn btn-submit bm0" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 lp5">
+                                <div class="button-row pull-left">
+                                    <input type="reset" value="Temizle" name="reset" class="btn btn-submit bm0" />
+                                </div>
+                            </div>
+                            <input type="hidden" name="v_error" id="v-error" value="Required" />
+                            <input type="hidden" name="v_email" id="v-email" value="Mail adresi hatalı" />
+                        </div>
+                    </fieldset>
+                }
+            </div>
+            <!-- /.form-container -->
+
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /#contact -->
+
+    <footer class="footer box">
+        <ul class="social pull-right">
+            @if (Model != null)
+            {
+                if (Model.Github != null)
+                {
+                    <li><a href="@Model.Github"><i class="icon-s-github"></i></a></li>
+                }
+                if (Model.Linkedin != null)
+                {
+                    <li><a href="@Model.Linkedin"><i class="icon-s-linkedin"></i></a></li>
+                }
+                if (Model.Twitter != null)
+                {
+                    <li><a href="@Model.Twitter"><i class="icon-s-twitter"></i></a></li>
+                }
+                if (Model.Facebook != null)
+                {
+                    <li><a href="@Model.Facebook"><i class="icon-s-facebook"></i></a></li>
+                }
+                if (Model.Instagram != null)
+                {
+                    <li><a href="@Model.Instagram"><i class="icon-s-instagram"></i></a></li>
+                }
+            }
+        </ul>
+        <p class="">Sait YILMAZ</p>
+        <p class="">© 1996</p>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer -->
+
+</div>
+@section scripts{
+    <script>
+        $.ajax({
+            url: "https://api.ipify.org/?format=json",
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                $.ajax({
+                    url: "/Home/AddVisitor",
+                    type: "POST",
+                    data: { ip: data.ip }
+                })
+            }
+        })
+        function OnSuccess(data) {
+            if (data == "sc") {
+                $(".alert").html("Mesajınız başarıyla gönderildi.");
+                $(".alert").removeClass("response");
+            } else if (data == "er") {
+                $(".alert").html("* olan alanlar zorunludur.");
+                $(".alert").removeClass("response");
+            }
+            else {
+                $(".alert").html("Mesajınız gönderilemedi. ");
+                $(".alert").removeClass("response");
+            }
+        }
+    </script>
+}

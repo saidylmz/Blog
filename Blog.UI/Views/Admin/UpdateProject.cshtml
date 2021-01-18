@@ -1,0 +1,56 @@
+﻿@model Blog.DAL.Classes.Project
+@{
+    ViewBag.Title = "Update Project";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+@section SelectedList{
+    <script>
+        $('li.secim:nth-of-type(3)').addClass("active");
+    </script>
+}
+<div class="container">
+
+    <div class="row">
+        @using (Html.BeginForm("UpdateProject", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.CreatedDate)
+            <br />
+            @Html.Label("Subject")
+            @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", required = "required" });
+            <br />
+            @Html.Label("Content")
+            <textarea name="Content" id="Content" required>@Model.Content</textarea>
+            <br />
+            @Html.Label("Tags")
+            <select class="select2 form-control m-t-15" multiple="multiple" style="height: 36px;width: 100%;" name="tags" id="tags" required>
+                @foreach (var item in ViewBag.Tags)
+                {
+                    if (Model.TagDetails.Any(x => x.TagID == item.ID))
+                    {
+
+                        <option selected value="@item.ID">@item.Name</option>
+                    }
+                    else
+                    {
+
+                        <option value="@item.ID">@item.Name</option>
+                    }
+                }
+            </select>
+            <br />
+            <br />
+            @Html.Label("Image")
+            <img width="70" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" />
+            <input type="file" name="File" id="File" />
+            <br />
+            <button class="btn btn-primary">Update</button>
+            <br />
+            <br />
+        }
+    </div>
+
+</div>
+
+
+

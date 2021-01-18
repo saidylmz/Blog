@@ -1,0 +1,56 @@
+﻿@model Blog.DAL.Classes.Info
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+@section SelectedList{
+    <script>
+        $('li.secim:nth-of-type(6)').addClass("active");
+    </script>
+}
+<div class="container">
+
+    <div class="row">
+        @using (Html.BeginForm("UpdateInfo", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <br />
+            @Html.HiddenFor(x => x.ID)
+
+            @Html.Label("About")
+            @Html.TextAreaFor(x => x.About, new { name = "About", id = "About", required = "required" })
+            <br />
+            @Html.Label("Adress")
+            @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", required = "required" })
+            <br />
+            @Html.Label("Phone")
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", required = "required" })
+            <br />
+            @Html.Label("Email")
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", required = "required" })
+            @Html.Label("Email 2")
+            @Html.TextBoxFor(x => x.Email2, new { @class = "form-control" })
+            <br />
+            @Html.Label("Facebook")
+            @Html.TextBoxFor(x => x.Facebook, new { @class = "form-control" })
+            @Html.Label("Twitter")
+            @Html.TextBoxFor(x => x.Twitter, new { @class = "form-control" })
+            @Html.Label("Instagram")
+            @Html.TextBoxFor(x => x.Instagram, new { @class = "form-control" })
+            @Html.Label("Github")
+            @Html.TextBoxFor(x => x.Github, new { @class = "form-control" })
+            @Html.Label("LinkedIn")
+            @Html.TextBoxFor(x => x.Linkedin, new { @class = "form-control" })
+            <br />
+            <button class="btn btn-success">Save</button>
+            <br />
+            <br />
+        }
+    </div>
+
+</div>
+
+
+
+
+
